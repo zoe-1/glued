@@ -1,0 +1,24 @@
+{
+  "name": "hapi_glued",
+  "version": "0.0.1",
+  "description": "Sample hapijs project.",
+  "main": "lib/start.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zoe-1/glued.git"
+  },
+  "keywords": [
+    "hapijs",
+    "glue",
+    "sample"
+  ],
+  "author": "Jon Swenson",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/zoe-1/glued/issues"
+  },
+  "homepage": "https://github.com/zoe-1/glued"
+}
