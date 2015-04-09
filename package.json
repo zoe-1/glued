@@ -4,7 +4,8 @@
   "description": "Sample hapijs project.",
   "main": "lib/start.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start":"node ./lib/start"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,14 @@
   "bugs": {
     "url": "https://github.com/zoe-1/glued/issues"
   },
-  "homepage": "https://github.com/zoe-1/glued"
+  "homepage": "https://github.com/zoe-1/glued",
+  "dependencies": {
+    "hapi": "^8.x.x",
+    "hoek": "^2.x.x"
+  },
+  "devDependencies": {
+    "code": "^1.x.x",
+    "glue": "^2.x.x",
+    "lab": "^5.x.x"
+  }
 }

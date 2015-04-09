@@ -1,0 +1,22 @@
+{
+  "server": {},
+  "connections": [
+    {
+      "port": 8000,
+      "labels": "web"
+    }, {
+      "port": 8181,
+      "labels": "api"
+    }
+  ],
+  "plugins": {
+    "./lib/main/main":[{
+      "select": "web"
+    }],
+    "./lib/version/version":[{
+      "select": "web",
+      "routes": { "prefix":"/version" }
+    }]
+  }
+}
+
