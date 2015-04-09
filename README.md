@@ -22,3 +22,9 @@ git checkout step-1
     * Use Makefile to start application.
        
 
+git checkout step-2 Testing the application.
+    * use lab and code to execute unit tests.
+    * Test ensure server starts up properly. 
+    * Test ensure plugins load properly.
+    * Configure make file and npm <command> to execute tests.
+    * Version plugin has prefix configured. prefix equals "version"
