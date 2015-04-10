@@ -79,10 +79,9 @@ git checkout step-3 Configure tls (Transport Layer Security) encryption
     * Make RESTful routes with html views for them:
         post    - form post   POST
         get     - path params GET 
-        puts    - validate headers?
-    * Should I make a description of RESTFUL  requests.
+    * See below link for more about RESTFUL requests.
       http://en.wikipedia.org/wiki/Representational_state_transfer
-    * tests for each route
+    * tests for the new route
     * Learning Objectives
       - Learn how to make routes that handle RESTful requests.
       - Understand the theory behind RESTful requests.

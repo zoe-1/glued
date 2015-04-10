@@ -10,6 +10,8 @@
 <body>
 
     <h1>./lib/one/views/index.html</h1>
+    {{rest}}
+    <br/>
     <div class="boom">CSS file ./lib/one/public/css/styles.css configured this text.</div>
     <br/><br/>
     <!-- Loads image from ./lib/one configured static image files directory.  -->
@@ -21,6 +23,13 @@
     <p class="insert_target">
         ... target 
     </p>
+
+    <form action="/one" method="get">
+          <input type="submit" value="Get">
+    </form>
+    <form action="/one" method="post">
+        <input type="submit" value="Post"> 
+    </form>
 
 </body >
 </html>

@@ -33,4 +33,19 @@ describe('Ensure plugin "one" loaded',function(){
             });
         });
     });
+
+
+    it('Plugin one should respond properly.', function(done){
+    
+        Glued.init(0, function(err, server){
+
+            expect(server.info.port).to.be.above(0);
+
+            server.inject({url:'/one', method:'POST'}, function (response) {
+
+                expect(response.statusCode).to.equal(200);
+                server.stop(done);
+            });
+        });
+    });
 });
