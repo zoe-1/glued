@@ -5,7 +5,7 @@
   "main": "lib/start.js",
   "scripts": {
     "test": "lab",
-    "start":"node ./lib/start",
+    "start": "node ./lib/start",
     "test-coverage": "lab -t 100",
     "test-coverage-html": "lab -r html -o test/coverage.html"
   },
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/zoe-1/glued",
   "dependencies": {
+    "handlebars": "^3.0.1",
     "hapi": "^8.x.x",
     "hoek": "^2.x.x"
   },
