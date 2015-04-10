@@ -28,3 +28,11 @@ git checkout step-2 Testing the application.
     * Test ensure plugins load properly.
     * Configure make file and npm <command> to execute tests.
     * Version plugin has prefix configured. prefix equals "version"
+
+
+git checkout step-3 Configure tls (Transport Layer Security) encryption 
+    * Create tls self signed cert for development server (openssl).
+    * Create configuration script. ./lib/congfig/config.js
+      Store tls cert values in config.js script. 
+    * Configure manifest.json file to include tls settings and server.
+    * On live server config file is to we swaped out w/ live settings.
