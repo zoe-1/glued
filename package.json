@@ -27,7 +27,8 @@
   "dependencies": {
     "handlebars": "^3.0.1",
     "hapi": "^8.x.x",
-    "hoek": "^2.x.x"
+    "hoek": "^2.x.x",
+    "joi": "^6.1.1"
   },
   "devDependencies": {
     "code": "^1.x.x",
