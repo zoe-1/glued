@@ -87,12 +87,27 @@ git checkout step-3 Configure tls (Transport Layer Security) encryption
       - Understand the theory behind RESTful requests.
       
 
-### step-6 validation input using joi.
-    * Step-4 & 5 configured "one" plugin's html views and added RESTful routes.  
-      Now it is time to add validation of submitted data using joi.  
-      joi is an object schema validation tool we will use to validate submitted data.  
-    * Make form that submits specific data to be validated.
-    * Make requirements of what kind of data can be submitted.
+### step-6 validation using joi.
+
+    * Step-4 & 5 showed how to make a plugin ("one") configured to use
+      html views, style sheets, page specific JavaScript, image includes,
+      and RESTful routes. These are all features any normal web server
+      would offer.  At this stage, we have hapijs cofigured to work like a 
+      normal webserver.
+    * Now it is time to add validation of submitted data using joi.
+      joi is an object schema validation tool we will use to validate
+      submitted data.  In this step we will use joi to validate form 
+      submission (POST requests) and  query strings (GET requests).
+    * Make a plugin named "joi".
+    * Make a view with an html form which submits specific data to be validated.
+    * Make a route that handles POST requests from the above form and
+      uses joi to validate data submitted by the form.
+    * Make a route named "badstuff" that handles query data submitted by
+      a link (GET request).  This route will also use joi to validate the 
+      data submitted by the GET request.
+    * Configure joi to establish what kind of data can be submitted.
+    * Add a new plugin configuration to the manifest.js file for joi plugin.
+    * Tests made with 100% coverage.
 
 
 ### step-7 sessions and security.

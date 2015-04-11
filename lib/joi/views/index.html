@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>one/index.html</title>
+        <!-- Notice paths are absolute based upon root path of the project.  -->
+        <link rel="stylesheet" type="text/css" href="/joi/css/styles.css">
+        <script src="/joi/js/joi.js" type="text/javascript"></script>
+    </head>
+<body>
+    <h1>./lib/joi/views/index.html</h1>
+    <br/>
+    <div class="boom">CSS file ./lib/joi/public/css/styles.css configured this text.</div>
+    <br/><br/>
+
+    <p class="insert_target">
+        ... target 
+    </p>
+    <br/>
+    <br/>
+
+    <p>
+        <form method="post" action="/joi"><br/>
+            Username:<input type="text" name="username"/><br/>
+            Password:&nbsp;<input type="password" name="password"/><br/>
+            <input type="submit" value="Login">
+        </form>
+    </p>
+    <p>
+        <a href="/joi/badstuff?name=too_&pass=12345">Submit Bad Stuff</a> 
+    </p>
+
+</body >
+</html>
+
