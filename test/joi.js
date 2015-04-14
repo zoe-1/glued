@@ -17,9 +17,10 @@ var describe = lab.describe;
 var it = lab.it;
 var expect = Code.expect;
 
-describe('Ensure plugin "one" loaded',function(){
 
-    it('Plugin joi  index should respond properly.', function(done){
+describe('Ensure plugin "joi" loaded',function(){
+
+    it('Plugin joi index should respond properly.', function(done){
     
         Glued.init(0, function(err, server){
 
@@ -34,7 +35,7 @@ describe('Ensure plugin "one" loaded',function(){
     });
 
 
-    it('Plugin one should respond properly.', function(done){
+    it('Plugin joi should respond properly.', function(done){
     
         Glued.init(0, function(err, server){
 

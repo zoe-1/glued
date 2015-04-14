@@ -2,9 +2,25 @@
 
 Example of basic hapijs project structure. <br/>
 Coding conventions used from  hueniversity learning experiment.<br/> 
+<br/>
+test/auth.js<br/>
+This script needs help to get 100% test coverage.<br/>
+Inspiration taken from:<br/>
+https://github.com/hueniverse/hueniversity and<br/> 
+https://github.com/npm/newww<br/>
+<br/>
 
-###
-Project follows the hapijs:
+### To Start
+git checkout step-7
+<br/><br/>
+git log <br/>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View all the steps.
+
+<br/>
+step-7 is the current state of where I am at.
+Each step builds on the previous.
+
+### Project follows the hapijs:
 [Style Guide](https://github.com/hapijs/contrib/blob/master/Style.md).
 
 
@@ -111,12 +127,33 @@ git checkout step-3 Configure tls (Transport Layer Security) encryption
 
 
 ### step-7 sessions and security.
+    * This step utilizes hapi-auth-cookie plugin
+    * with a simple login system that works. 
+    * But, I am having trouble with getting 100% coverage in the tests.
     * sessions -
     * user fingerprint -
     * security planning.
 
 
 ### step-8 logging.
+    * To do
     * log output to file. Track performance etc. 
+
+
+
+### Routes
+localhost:8000  <br/>
+http://localhost:8000/one     GET<br/>
+localhost:8000/joi            POST GET<br/>
+localhost:8000/joi/badstuff   GET<br/>
+localhost:8000/auth           POST GET<br/>
+localhost:8000/auth/loggedin          <br/>
+localhost:8000/auth/logout          <br/>
+
+
+### HTML and static assets 
+handlebars configured<br/>
+static assets<br/>
+Each plugin has directories configured for css, image, and js files.
 
 
