@@ -34,6 +34,7 @@ describe('Ensure plugin "auth" loaded properly',function(){
             server.inject('/auth', function (response) {
 
                 expect(response.statusCode).to.equal(200);
+                response.request.auth.session.clear();
                 server.stop(done);
             });
         });
@@ -49,11 +50,15 @@ describe('Ensure plugin "auth" loaded properly',function(){
             server.inject({url:'/auth', method:'POST'}, function (response) {
 
                 expect(response.statusCode).to.equal(200);
+                response.request.auth.session.clear();
                 server.stop(done);
             });
         });
     });
+});
 
+
+describe('DEBUG FOCUS',function(){
 
     it('Plugin auth POST login request valid username and pw.', function(done){
     
@@ -64,21 +69,16 @@ describe('Ensure plugin "auth" loaded properly',function(){
             server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
 
                 expect(response.statusCode).to.equal(302);
+
+                response.request.auth.session.clear();
                 server.stop(done);
             });
         });
     });
 
 
-
     it('Plugin auth POST login request user already logged in.', function(done){
 
-        /*
-         * This logic of this test does not test what it should.  
-         * I do not know how to access server authentication state in tests.
-         * How do I access the request.auth.credentials.name?
-         * Do you make a mock up for this?
-         */
         Glued.init(0, function(err, server){
 
             expect(server.info.port).to.be.above(0);
@@ -86,6 +86,21 @@ describe('Ensure plugin "auth" loaded properly',function(){
                 //res.raw.req.auth.isAuthenticated = true;
                 // request.auth.isAuthenticated)
                 server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
+
+                    //expect(res.statusCode).to.equal('mystrategy');;
+                    //expect(res.raw.res).to.equal('mystrategy');
+                    
+                    // ************************
+                    // This gets the set-cookie value
+                    var cookie = res.raw.res._headers['set-cookie'];
+                    var headers1 = res.raw.res._headers;
+
+                    //expect(header).to.equal('mycookie');;
+
+                    // The request is not authenticated
+                    //expect(res.request.auth).to.equal(null);
+                    //expect(res.request.auth.isAuthenticated).to.equal(true);
+                    // expect(res.request.auth).to.equal(true);
 
                     // How would I access: isAuthenticated to test.
                     // res.raw.req.auth = {};
@@ -98,7 +113,33 @@ describe('Ensure plugin "auth" loaded properly',function(){
                     // Forwarded to /loggedin page.
                     expect(res.headers.location).to.include('/loggedin');
 
-                    server.stop(done);
+                    //expect(res.headers['set-cookie']).to.equal('hi');
+                    expect(res.headers['set-cookie'].length).to.equal(1);
+                    expect(res.headers['set-cookie'][0]).to.contain('Max-Age=60');
+
+                    /*
+                    server.inject({ method: 'GET', url: '/resource', headers: { cookie: 'special=' + cookie[1] } }, function (res) {
+
+                        expect(res.headers['set-cookie']).to.not.exist();
+                        expect(res.statusCode).to.equal(401);
+                        done();
+                    });
+                    */
+
+                    server.inject({ method: 'GET', url: '/auth', headers: res.headers['set-cookie']}, function (res) {
+
+                        // expect(res.request.auth.isAuthenticated).to.equal(true);
+                        //expect(res.raw.res).to.equal('mystrategy');
+                        //expect(request.auth.credentials.name).to.equal('mystrategy');
+
+                        expect(res.request.headers['set-cookie']).to.not.exist();
+                        // 302 redirects to another uri
+                        expect(res.statusCode).to.equal(200);
+                        server.stop(done);
+                        //done();
+                    });
+
+                    // server.stop(done);
                 });
         });
     });
@@ -156,13 +197,9 @@ describe('Trying to use before after to test if session was already.',function()
                 //test_server.stop(done);
                 //test_server.auth.test('session', response.raw.req, test_server.stop(done))
                 server.stop(done());
-                
             });
-
         });
-
     });
-
 });
 
 
@@ -275,7 +312,6 @@ describe('Adopting hapi-auth-cookie docs test to mine',function(){
         });
     });
 });
-
 
 describe('Test from hapi-auth-cookie docs',function(){
 
