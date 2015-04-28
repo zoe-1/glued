@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/zoe-1/glued",
   "dependencies": {
+    "crumb": "^4.0.3",
     "handlebars": "^3.0.1",
     "hapi": "^8.x.x",
     "hapi-auth-cookie": "^2.0.0",

@@ -1,8 +1,17 @@
 
-
-You are logged in. <br/> {{boom}}
-<br/>
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>auth/index.html</title>
+        <!-- Notice paths are absolute based upon root path of the project.  -->
+        <link rel="stylesheet" type="text/css" href="/auth/css/styles.css">
+        <script src="/auth/js/auth.js" type="text/javascript"></script>
+    </head>
+<body>
+    <div class="welcome_message">{{boom}}</div>
     <form method="get" action="/auth/logout">
         <input type="submit" value="Logout">
     </form>
+</body>
+</html>

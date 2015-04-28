@@ -5,13 +5,13 @@ start:
 test:
 	npm test
 
-cov:
+test-cov:
 	npm run test-coverage
 
-cov-html:
+test-cov-html:
 	npm run test-coverage-html
 
-cov-mac:
+test-cov-mac:
 	npm run test-coverage-html
 	open -a Safari ./test/coverage.html
 
