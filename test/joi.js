@@ -26,7 +26,9 @@ describe('Ensure plugin "joi" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject('/joi', function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject('/joi', function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 server.stop(done);
@@ -41,7 +43,9 @@ describe('Ensure plugin "joi" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/joi', method:'POST'}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/joi', method:'POST'}, function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 server.stop(done);
@@ -56,7 +60,9 @@ describe('Ensure plugin "joi" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/joi/badstuff'}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/joi/badstuff'}, function (response) {
 
                 expect(response.statusCode).to.equal(400);
                 server.stop(done);
@@ -71,7 +77,9 @@ describe('Ensure plugin "joi" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/joi/badstuff?name=too_long_fail&pass=12345'}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/joi/badstuff?name=too_long_fail&pass=12345'}, function (response) {
 
                 expect(response.statusCode).to.equal(400);
                 server.stop(done);
@@ -86,7 +94,9 @@ describe('Ensure plugin "joi" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/joi/badstuff?name=too_&pass=12345'}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/joi/badstuff?name=too_&pass=12345'}, function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 server.stop(done);
