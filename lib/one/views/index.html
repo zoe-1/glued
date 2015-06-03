@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>one/index.html</title>
+        <!-- Notice paths are absolute based upon root path of the project.  -->
+        <link rel="stylesheet" type="text/css" href="/one/css/styles.css">
+        <script src="/one/js/one.js" type="text/javascript"></script>
+    </head>
+<body>
+
+    <h1>./lib/one/views/index.html</h1>
+    {{rest}}
+    <br/>
+    <div class="boom">CSS file ./lib/one/public/css/styles.css configured this text.</div>
+    <br/><br/>
+    <!-- Loads image from ./lib/one configured static image files directory.  -->
+    <h3>Image below loaded from ./lib/one/public/images </h3>
+    <br/>
+    <img src="/one/images/super_star.png" alt="Super Star" width="50%" height="50%"/>
+
+    <br/>
+    <p class="insert_target">
+        ... target 
+    </p>
+
+    <form action="/one" method="get">
+          <input type="submit" value="Get">
+    </form>
+    <form action="/one" method="post">
+        <input type="submit" value="Post"> 
+    </form>
+
+</body >
+</html>
+

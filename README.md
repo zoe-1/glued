@@ -1,36 +1,39 @@
 #### Glued 
 
 Example of basic hapijs project structure. <br/>
-Coding conventions used from  hueniversity learning experiment.<br/> 
+Coding conventions from  hapijs university learning experiment.<br/> 
 <br/>
-test/auth.js<br/>
-This script needs help to get 100% test coverage.<br/>
 Inspiration taken from:<br/>
-https://github.com/hueniverse/hueniversity and<br/> 
+https://github.com/hapijs/university and<br/> 
 https://github.com/npm/newww<br/>
+<br/>
 
 ### To Start
-git checkout step-7
+git clone https://github.com/zoe-1/glued.git  
 <br/><br/>
-git log <br/>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View all the steps.
+git branch <br/>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View all branches / steps.
 
 <br/>
-step-7 is the current state of where I am at.
-Each step builds on the previous.
+step-7 is the current step.
+Project uses glue to configure the application.<br/>  
+TLS/SSL is enforced on all routes.  Application will not accept non TLS requests,
+they are redirected to be https requests.
 
 ### Project follows the hapijs:
 [Style Guide](https://github.com/hapijs/contrib/blob/master/Style.md).
 
 
 ### step-1 hapijs app skeleton
+```
 git checkout template-skeleton
 git checkout step-1
-    * install packages
-      npm install hapi@latest hoek@latest glue@latest --save
-      npm install code@latest lab@latest --save-dev
-    * Make two modules in library.
-      main and version.
+```
+    * install packages<br/>
+      npm install hapi@latest hoek@latest glue@latest --save<br/>
+      npm install code@latest lab@latest --save-dev<br/>
+    * Make two modules in library. <br/>
+      main and version.<br/>
       Use glue to load modules.
       See: ./lib/manifest.json
            ./lib/index.js

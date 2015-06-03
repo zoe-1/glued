@@ -1,10 +1,13 @@
 {
-  "name": "hapi_glued",
+  "name": "glued",
   "version": "0.0.1",
   "description": "Sample hapijs project.",
   "main": "lib/start.js",
   "scripts": {
-    "test": "test"
+    "test": "lab",
+    "start": "node ./lib/start",
+    "test-coverage": "lab -t 100",
+    "test-coverage-html": "lab -r html -o test/coverage.html"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,20 @@
   "bugs": {
     "url": "https://github.com/zoe-1/glued/issues"
   },
-  "homepage": "https://github.com/zoe-1/glued"
+  "homepage": "https://github.com/zoe-1/glued",
+  "dependencies": {
+    "crumb": "^4.0.3",
+    "handlebars": "^3.0.1",
+    "hapi": "^8.x.x",
+    "hapi-auth-cookie": "^2.0.0",
+    "hoek": "^2.x.x",
+    "joi": "^6.1.1"
+  },
+  "devDependencies": {
+    "cheerio": "^0.19.0",
+    "code": "^1.x.x",
+    "glue": "^2.x.x",
+    "lab": "^5.x.x",
+    "lout": "^6.2.2"
+  }
 }
