@@ -26,7 +26,9 @@ describe('Ensure plugin "one" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject('/one', function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject('/one', function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 server.stop(done);
@@ -41,7 +43,9 @@ describe('Ensure plugin "one" loaded',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/one', method:'POST'}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/one', method:'POST'}, function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 server.stop(done);

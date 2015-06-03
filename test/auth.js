@@ -29,8 +29,10 @@ describe('Ensure plugin "auth" loaded properly',function(){
     
         Glued.init(0, function(err, server){
 
+            var tlserver = server.select('web-tls');
+
             expect(server.info.port).to.be.above(0);
-            server.inject('/auth', function (response) {
+            tlserver.inject('/auth', function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 response.request.auth.session.clear();
@@ -48,10 +50,12 @@ describe('Ensure plugin "auth" loaded properly',function(){
 
             var request = { method: 'POST', url: '/auth', payload: internals.login_credentials('zoe@zoe.com', 'test')};
 
+            var tlserver = server.select('web-tls');
+
             expect(request.payload).to.equal('{\"username\":\"zoe@zoe.com\",\"password\":\"test\"}');
 
             //var request = {url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})};  // This request works.
-            server.inject(request, function (response) {
+            tlserver.inject(request, function (response) {
 
                 // When request was made the user was not logged in yet.
                 expect(response.request.auth.isAuthenticated).to.equal(false);  // request is not logged in yet.
@@ -68,11 +72,13 @@ describe('Ensure plugin "auth" loaded properly',function(){
 
             expect(server.info.port).to.be.above(0);
 
+            var tlserver = server.select('web-tls');
+
             // var request = { method: 'POST', url: '/auth', payload: internals.login_credentials('', 'test')};        // This request d/n bypass joi.
             // var request = { method: 'POST', url: '/auth', headers: { authorization: internals.header('', 'test') } };  // This request bypasses joi.
             // var request = { method: 'POST', url: '/auth', headers: { authorization: internals.header('zoe@zoe.com', 'test') } };
             var request = {url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})};  // This request works.
-            server.inject(request, function (response) {
+            tlserver.inject(request, function (response) {
 
                 // When request was made the user was not logged in yet.
                 expect(response.request.auth.isAuthenticated).to.equal(false);  // request is not logged in yet.
@@ -93,7 +99,9 @@ describe('DEBUG FOCUS',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
 
                 // Ensure redirect occurred.
                 expect(response.statusCode).to.equal(302);
@@ -112,7 +120,9 @@ describe('DEBUG FOCUS',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
 
                 expect(response.statusCode).to.equal(302);
                 expect(response.headers.location).to.include('/auth/loggedin');
@@ -127,7 +137,7 @@ describe('DEBUG FOCUS',function(){
                 // This got us coverage on line 13
                 // !!**!!
                 var request = { method: 'GET', url: '/auth', headers: {cookie: 'example='+ cookie[1]} };
-                server.inject(request, function (res) {
+                tlserver.inject(request, function (res) {
 
                     expect(res.statusCode).to.equal(302);
                     expect(res.headers['set-cookie']).to.not.exist();
@@ -151,8 +161,11 @@ describe('DEBUG FOCUS',function(){
 
             expect(server.info.port).to.be.above(0);
 
+            var tlserver = server.select('web-tls');
+
             var request1 = { url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'}) };
-            server.inject(request1, function (response) {
+
+            tlserver.inject(request1, function (response) {
 
                 // Redirects to /auth/loggedin
                 expect(response.statusCode).to.equal(302);
@@ -166,7 +179,7 @@ describe('DEBUG FOCUS',function(){
 
                 // Include the auth cookie to next request.
                 var request2 = { method: 'GET', url: '/auth', headers: {cookie: 'example='+ cookie[1]} };
-                server.inject(request2, function (res) {
+                tlserver.inject(request2, function (res) {
 
                     // Redirects to loggedin
                     expect(res.statusCode).to.equal(302);
@@ -201,7 +214,9 @@ describe('/auth/loggedin coverage',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
 
                 // Redirects to /auth/loggedin
                 expect(response.statusCode).to.equal(302);
@@ -214,7 +229,7 @@ describe('/auth/loggedin coverage',function(){
                 var cookie = header[0].match(/(?:[^\x00-\x20\(\)<>@\,;\:\\"\/\[\]\?\=\{\}\x7F]+)\s*=\s*(?:([^\x00-\x20\"\,\;\\\x7F]*))/);
 
                 // Include the auth cookie to next request.
-                server.inject({ method: 'GET', url: '/auth/loggedin', headers: {cookie: 'example='+ cookie[1]}}, function (res) {
+                tlserver.inject({ method: 'GET', url: '/auth/loggedin', headers: {cookie: 'example='+ cookie[1]}}, function (res) {
 
                     // Redirects to loggedin
                     expect(res.statusCode).to.equal(200);
@@ -241,7 +256,9 @@ describe('/auth/loggedin coverage',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (response) {
 
                 // Redirects to /auth/loggedin
                 expect(response.statusCode).to.equal(302);
@@ -254,7 +271,7 @@ describe('/auth/loggedin coverage',function(){
                 var cookie = header[0].match(/(?:[^\x00-\x20\(\)<>@\,;\:\\"\/\[\]\?\=\{\}\x7F]+)\s*=\s*(?:([^\x00-\x20\"\,\;\\\x7F]*))/);
 
                 // Include the auth cookie to next request.
-                server.inject({ method: 'GET', url: '/auth/logout', headers: {cookie: 'example='+ cookie[1]}}, function (res) {
+                tlserver.inject({ method: 'GET', url: '/auth/logout', headers: {cookie: 'example='+ cookie[1]}}, function (res) {
 
                     // Redirects to after logout to /auth 
                     expect(res.statusCode).to.equal(302);
@@ -281,10 +298,17 @@ it('Logged in with bad account / username. It d/n exist.',function(done){
 
         expect(server.info.port).to.be.above(0);
 
+        var tlserver = server.select('web-tls');
+
         // request.auth.isAuthenticated)
-        server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'bam@zoe.com', password:'test44'})}, function (res) {
+        tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'bam@zoe.com', password:'test44'})}, function (res) {
+
+            //expect(res.request.headers).to.equal('boom');
+            // expect(res.request.path).to.equal('boom');
 
             expect(res.statusCode).to.equal(200);
+
+            // expect(res.headers.location).to.equal('https://localhost:8001/auth');
 
             var $ = Cheerio.load(res.result);
             var result = ($('.response_message','body').text());
@@ -297,14 +321,47 @@ it('Logged in with bad account / username. It d/n exist.',function(done){
     });
 });
 
+
+it('Login https',function(done){
+
+    Glued.init(0, function(err, server){
+
+        // Select the tls connection to execute the test with.
+        var tlserver = server.select('web-tls');
+
+        var url = {
+            protocol: 'https',
+            hostname: 'localhost',
+            port: '8001',
+            pathname: 'auth'
+        };
+
+
+        tlserver.inject({url: url, method:'POST', payload: JSON.stringify({username:'bam@zoe.com', password:'test44'}) }, function (res) {
+
+            //expect(res.headers).to.equal('https://localhost:8001/auth');
+            // expect(res.headers.location).to.equal('https://localhost:8001/auth');
+            expect(res.statusCode).to.equal(200);
+            var $ = Cheerio.load(res.result);
+            var result = ($('.response_message','body').text());
+            expect(result).to.equal('Invalid username or password');
+            server.stop(done);
+        });
+    });
+});
+
+
 it('Logged in with bad pw.',function(done){
 
     Glued.init(0, function(err, server){
 
         expect(server.info.port).to.be.above(0);
 
+
+        var tlserver = server.select('web-tls');
+
         // request.auth.isAuthenticated)
-        server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test44'})}, function (res) {
+        tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test44'})}, function (res) {
 
             expect(res.statusCode).to.equal(200);
 
@@ -325,8 +382,10 @@ it('Logged in with no pw.',function(done){
 
         expect(server.info.port).to.be.above(0);
 
+        var tlserver = server.select('web-tls');
+
         // request.auth.isAuthenticated)
-        server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:''})}, function (res) {
+        tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:''})}, function (res) {
 
             // joi validation test failed. joi error.
             expect(res.statusCode).to.equal(400);
@@ -352,6 +411,8 @@ it('Logged in with no username. bypass joi',function(done){
 
         expect(server.info.port).to.be.above(0);
 
+        var tlserver = server.select('web-tls');
+
         // Note: joi can be configured to validate POST payload, GET query, or headers with validate.headers.
         // Understanding the above allows you to bypass joi tests and get 100% coverage by sending headers data to POST route. 
         // This route is configured to validate payload parameters (POST requests). If only send payload parameters, this would 
@@ -364,7 +425,7 @@ it('Logged in with no username. bypass joi',function(done){
         // For above to be validated by joi must configure validate.headers parameter in joi then headers will be validated.  Hence, we were able to bypass it here.
         // http://www.hapijs.com/tutorials/validation
         var request = { method: 'POST', url: '/auth', headers: { authorization: internals.login_credentials('', 'test')} };  // This fails loggin in event w. correct credentials..
-        server.inject(request, function (res) {
+        tlserver.inject(request, function (res) {
 
             //expect(res.statusCode).to.equal(400);
             expect(res.statusCode).to.equal(200);
@@ -397,6 +458,8 @@ describe('Another shot at line 13, 14 coverage',function(){
 
             expect(server.info.port).to.be.above(0);
 
+            var tlserver = server.select('web-tls');
+
             var users = {
                 jon: {
                     id: 'Jon',
@@ -422,7 +485,7 @@ describe('Another shot at line 13, 14 coverage',function(){
 
             // request.auth.isAuthenticated)
             //server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
-            server.inject(opts , function (res) {
+            tlserver.inject(opts , function (res) {
 
                 expect(res.statusCode).to.equal(302);
 
@@ -431,7 +494,7 @@ describe('Another shot at line 13, 14 coverage',function(){
                 //server.inject({url:'/loggedin'}, function (res) {
 
                 // ****
-                server.inject({ method:'GET', url:'/auth/loggedin'}, function (res) {
+                tlserver.inject({ method:'GET', url:'/auth/loggedin'}, function (res) {
 
                     var header = res.headers['set-cookie'];
 
@@ -464,8 +527,10 @@ describe('Adopting hapi-auth-cookie docs test into project',function(){
         Glued.init(0, function(err, server){
 
                 //server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
+                //
+                var tlserver = server.select('web-tls');
 
-                server.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
+                tlserver.inject({url:'/auth', method:'POST', payload: JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
 
                     //expect(res.payload).to.equal('invalid');
                     expect(res.statusCode).to.equal(302);
@@ -481,7 +546,7 @@ describe('Adopting hapi-auth-cookie docs test into project',function(){
                     //  { cookie: 'special=' + cookie[1] } }, function (res) {
                     //server.inject({url:'/auth', method:'POST', payload: 
                     //  JSON.stringify({username:'zoe@zoe.com', password:'test'})}, function (res) {
-                    server.inject({ method: 'GET', url: '/auth', headers: res.headers }, function (res) {
+                    tlserver.inject({ method: 'GET', url: '/auth', headers: res.headers }, function (res) {
 
                         // expect(res.headers['set-cookie']).to.not.exist();
                         // 302 redirects to another uri
@@ -562,7 +627,6 @@ describe('Test from hapi-auth-cookie docs',function(){
         });
     });
 });
-
 
 internals.header = function (username, password) {
 

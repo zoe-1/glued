@@ -27,7 +27,9 @@ describe('Ensure server started up',function(){
 
             expect(server.info.port).to.be.above(0);
 
-            server.inject('/version', function (response) {
+            var tlserver = server.select('web-tls');
+
+            tlserver.inject('/version', function (response) {
 
                 expect(response.statusCode).to.equal(200);
                 expect(response.result.version).to.equal(Pkg.version)
