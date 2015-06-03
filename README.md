@@ -15,9 +15,9 @@ git branch <br/>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View all branches / steps.
 
 <br/>
-step-7 is the current step.
+### step-7 is the current step.
 Project uses glue to configure the application.<br/>  
-TLS/SSL is enforced on all routes.  Application will not accept non TLS requests,
+TLS/SSL is enforced on all routes.  Application will not accept non TLS requests,<br/>
 they are redirected to be https requests.
 
 ### Project follows the hapijs:
@@ -29,16 +29,17 @@ they are redirected to be https requests.
 git checkout template-skeleton
 git checkout step-1
 ```
-    * install packages<br/>
-      npm install hapi@latest hoek@latest glue@latest --save<br/>
-      npm install code@latest lab@latest --save-dev<br/>
-    * Make two modules in library. <br/>
-      main and version.<br/>
-      Use glue to load modules.
-      See: ./lib/manifest.json
-           ./lib/index.js
-    * Configure npm start command.
-    * Use Makefile to start application.
+<br/>
+* install packages<br/>
+  npm install hapi@latest hoek@latest glue@latest --save<br/>
+  npm install code@latest lab@latest --save-dev<br/>
+* Make two modules in library. <br/>
+  main and version.<br/>
+  Use glue to load modules.
+  See: ./lib/manifest.json
+       ./lib/index.js
+* Configure npm start command.
+* Use Makefile to start application.
        
 
 ### step-2 Testing the application
