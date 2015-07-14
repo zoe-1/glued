@@ -1,6 +1,7 @@
 #### Glued 
 
-Example of basic hapijs project structure. <br/>
+Experiment with hapijs project structure using glue. <br/>
+For a more solid hapijs glue example, refer to [hapijs/university project](https://github.com/hapijs/university).
 Coding conventions from  hapijs university learning experiment.<br/> 
 <br/>
 Inspiration taken from:<br/>
